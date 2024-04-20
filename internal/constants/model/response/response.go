@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Adamant-Investment-PLC/Backend/internal/constants/errors"
+	"github.com/alazarbeyeneazu/gms-backend/internal/constants/errors"
 
 	"github.com/gin-gonic/gin"
 	validation "github.com/go-ozzo/ozzo-validation"

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	response2 "github.com/Adamant-Investment-PLC/Backend/internal/constants/model/response"
+	response2 "github.com/alazarbeyeneazu/gms-backend/internal/constants/model/response"
 
-	"github.com/Adamant-Investment-PLC/Backend/internal/constants/errors"
+	"github.com/alazarbeyeneazu/gms-backend/internal/constants/errors"
 
 	"github.com/joomcode/errorx"
 	"github.com/spf13/viper"
