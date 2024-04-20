@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/Adamant-Investment-PLC/Backend/internal/handler/middleware"
+	"github.com/alazarbeyeneazu/gms-backend/internal/handler/middleware"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
