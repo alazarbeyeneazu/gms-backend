@@ -3,8 +3,8 @@ package users
 import (
 	"net/http"
 
-	"github.com/Adamant-Investment-PLC/Backend/internal/glue/routing"
-	"github.com/Adamant-Investment-PLC/Backend/internal/handler"
+	"github.com/alazarbeyeneazu/gms-backend/internal/glue/routing"
+	"github.com/alazarbeyeneazu/gms-backend/internal/handler"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -20,7 +20,19 @@ func Init(
 		{
 			Method:     http.MethodPost,
 			Path:       "/user",
-			Handler:    user.CreateUser,
+			Handler:    user.RegisterUser,
+			Middleware: []gin.HandlerFunc{},
+			Domains:    []string{"v1"},
+		}, {
+			Method:     http.MethodPut,
+			Path:       "/user",
+			Handler:    user.UpdateUser,
+			Middleware: []gin.HandlerFunc{},
+			Domains:    []string{"v1"},
+		}, {
+			Method:     http.MethodDelete,
+			Path:       "/user",
+			Handler:    user.DeleteUser,
 			Middleware: []gin.HandlerFunc{},
 			Domains:    []string{"v1"},
 		},

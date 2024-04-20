@@ -3,5 +3,7 @@ package handler
 import "github.com/gin-gonic/gin"
 
 type User interface {
-	CreateUser(c *gin.Context)
+	RegisterUser(c *gin.Context)
+	UpdateUser(c *gin.Context)
+	DeleteUser(c *gin.Context)
 }

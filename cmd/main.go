@@ -1,6 +1,6 @@
 package main
 
-import initiator "github.com/Adamant-Investment-PLC/Backend/initiator"
+import initiator "github.com/alazarbeyeneazu/gms-backend/initiator"
 
 func main() {
 	initiator.Initiate()

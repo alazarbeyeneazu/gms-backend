@@ -1,11 +1,13 @@
-package goenergy
+package users
 
 import (
 	"net/http"
 
-	"github.com/Adamant-Investment-PLC/Backend/internal/constants/model/response"
-	"github.com/Adamant-Investment-PLC/Backend/internal/handler"
-	"github.com/Adamant-Investment-PLC/Backend/internal/module"
+	"github.com/alazarbeyeneazu/gms-backend/internal/constants/errors"
+	"github.com/alazarbeyeneazu/gms-backend/internal/constants/model/dto"
+	"github.com/alazarbeyeneazu/gms-backend/internal/constants/model/response"
+	"github.com/alazarbeyeneazu/gms-backend/internal/handler"
+	"github.com/alazarbeyeneazu/gms-backend/internal/module"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -22,8 +24,48 @@ func Init(userModule module.User, log zap.Logger) handler.User {
 		Logger:     log,
 	}
 }
-func (u *user) CreateUser(c *gin.Context) {
+func (u *user) RegisterUser(c *gin.Context) {
+	var usr dto.User
+	if err := c.ShouldBind(&usr); err != nil {
+		err := errors.ErrInvalidUserInput.Wrap(err, "unable to bind user to dto.User")
+		_ = c.Error(err)
+		return
+	}
+	res, err := u.UserModule.RegisterUser(c, usr)
+	if err != nil {
+		_ = c.Error(err)
+		return
+	}
+	response.SendSuccessResponse(c, http.StatusCreated, res)
 
-	response.SendSuccessResponse(c, http.StatusCreated, "")
-	return
+}
+func (u *user) UpdateUser(c *gin.Context) {
+	var usr dto.User
+	if err := c.ShouldBind(&usr); err != nil {
+		err := errors.ErrInvalidUserInput.Wrap(err, "unable to bind user to dto.User")
+		_ = c.Error(err)
+		return
+	}
+	res, err := u.UserModule.UpdateUser(c, usr)
+	if err != nil {
+		_ = c.Error(err)
+		return
+	}
+	response.SendSuccessResponse(c, http.StatusOK, res)
+
+}
+func (u *user) DeleteUser(c *gin.Context) {
+	var usr dto.User
+	if err := c.ShouldBind(&usr); err != nil {
+		err := errors.ErrInvalidUserInput.Wrap(err, "unable to bind user to dto.User")
+		_ = c.Error(err)
+		return
+	}
+	res, err := u.UserModule.DeleteUser(c, usr)
+	if err != nil {
+		_ = c.Error(err)
+		return
+	}
+	response.SendSuccessResponse(c, http.StatusOK, res)
+
 }

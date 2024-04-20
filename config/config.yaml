@@ -1,6 +1,7 @@
 database:
-  url: mongodb://localhost:27017/aip?retryWrites=true&w=majority
+  url: mongodb://localhost:27017/deafric?retryWrites=true&w=majority
 app:
   host: 0.0.0.0
   port: 8000
 debug: true
+db_name: deafric
