@@ -50,3 +50,32 @@ func (u *user) DeleteUser(ctx context.Context, userID primitive.ObjectID) error 
 	}
 	return nil
 }
+func (u *user) GetUsers(ctx context.Context, filter bson.M) ([]dto.User, error) {
+	var users []dto.User
+	result, err := u.db.Find(ctx, filter)
+	if err != nil {
+		u.log.Error("error while getting payment rule", zap.Error(err))
+		err = errors.ErrUnableToUpdate.Wrap(err, err.Error(), zap.Any("filter", filter))
+		return nil, err
+	}
+
+	defer result.Close(ctx)
+
+	for result.Next(ctx) {
+		var usr dto.User
+		if err := result.Decode(&usr); err != nil {
+			u.log.Error("error decoding payment rule", zap.Error(err))
+			err = errors.ErrUnableToUpdate.Wrap(err, err.Error(), zap.Any("filter", filter))
+			return nil, err
+		}
+		users = append(users, usr)
+	}
+
+	if err := result.Err(); err != nil {
+		u.log.Error("error while iterating payment rule result", zap.Error(err))
+		err = errors.ErrUnableToUpdate.Wrap(err, err.Error(), zap.Any("filter", filter))
+		return nil, err
+	}
+
+	return users, nil
+}
