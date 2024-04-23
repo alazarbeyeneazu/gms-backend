@@ -8,6 +8,7 @@ import (
 	"github.com/alazarbeyeneazu/gms-backend/internal/constants/model/response"
 	"github.com/alazarbeyeneazu/gms-backend/internal/handler"
 	"github.com/alazarbeyeneazu/gms-backend/internal/module"
+	"go.mongodb.org/mongo-driver/bson"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -62,6 +63,24 @@ func (u *user) DeleteUser(c *gin.Context) {
 		return
 	}
 	res, err := u.UserModule.DeleteUser(c, usr)
+	if err != nil {
+		_ = c.Error(err)
+		return
+	}
+	response.SendSuccessResponse(c, http.StatusOK, res)
+
+}
+
+func (u *user) GetUsers(c *gin.Context) {
+	var bsonMap bson.M
+	filter := c.Query("filter")
+	err := bson.UnmarshalExtJSON([]byte(filter), true, &bsonMap)
+	if err != nil {
+		err := errors.ErrInvalidUserInput.Wrap(err, "unable to bind user to dto.user")
+		_ = c.Error(err)
+		return
+	}
+	res, err := u.UserModule.GetUsers(c, bsonMap)
 	if err != nil {
 		_ = c.Error(err)
 		return

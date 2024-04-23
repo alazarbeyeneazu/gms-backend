@@ -57,3 +57,6 @@ func (u *user) DeleteUser(ctx context.Context, user dto.User) (dto.User, error) 
 	u.userDB.DeleteUser(ctx, user.ID)
 	return user, nil
 }
+func (u *user) GetUsers(ctx context.Context, filter bson.M) ([]dto.User, error) {
+	return u.userDB.GetUsers(ctx, filter)
+}

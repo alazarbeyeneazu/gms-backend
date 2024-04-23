@@ -1,4 +1,4 @@
-package users
+package paymentrule
 
 import (
 	"net/http"
@@ -13,36 +13,36 @@ import (
 func Init(
 	grp *gin.RouterGroup,
 	log zap.Logger,
-	user handler.User,
+	user handler.PaymentRule,
 
 ) {
-	userRoute := []routing.Route{
+	paymentRuleRoute := []routing.Route{
 		{
 			Method:     http.MethodPost,
-			Path:       "/user",
-			Handler:    user.RegisterUser,
-			Middleware: []gin.HandlerFunc{},
-			Domains:    []string{"v1"},
-		}, {
-			Method:     http.MethodGet,
-			Path:       "/user",
-			Handler:    user.GetUsers,
+			Path:       "/payment/rule",
+			Handler:    user.CreatePaymentRule,
 			Middleware: []gin.HandlerFunc{},
 			Domains:    []string{"v1"},
 		}, {
 			Method:     http.MethodPut,
-			Path:       "/user",
-			Handler:    user.UpdateUser,
+			Path:       "/payment/rule",
+			Handler:    user.UpdatepaymentRule,
+			Middleware: []gin.HandlerFunc{},
+			Domains:    []string{"v1"},
+		}, {
+			Method:     http.MethodGet,
+			Path:       "/payment/rule",
+			Handler:    user.GetPaymentRule,
 			Middleware: []gin.HandlerFunc{},
 			Domains:    []string{"v1"},
 		}, {
 			Method:     http.MethodDelete,
-			Path:       "/user",
-			Handler:    user.DeleteUser,
+			Path:       "/payment/rule",
+			Handler:    user.DeletepaymentRule,
 			Middleware: []gin.HandlerFunc{},
 			Domains:    []string{"v1"},
 		},
 	}
-	routing.RegisterRoute(grp, userRoute, log)
+	routing.RegisterRoute(grp, paymentRuleRoute, log)
 
 }
