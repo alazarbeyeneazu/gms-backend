@@ -26,3 +26,17 @@ type PaymentRule struct {
 	UpdatedAt    time.Time          `json:"updated_at" bson:"updated_at"`
 	DeletedAt    time.Time          `json:"deleted_at" bson:"deleted_at"`
 }
+
+type RegisterCustomer struct {
+	ID            primitive.ObjectID `json:"id" bson:"_id"`
+	User          User               `json:"user" validate:"required"`
+	UserID        primitive.ObjectID `json:"user_id" bson:"user_id"`
+	PaymentRuleID primitive.ObjectID `json:"payment_rule_id" bson:"payment_rule_id" validate:"required"`
+	QRCode        string             `json:"qr_code" bson:"qr_code" validate:"required"`
+	StarDate      time.Time          `json:"start_date" bson:"start_date" validate:"required"`
+	EndDate       time.Time          `json:"end_date" bson:"end_date"`
+	RegisterdBy   primitive.ObjectID `json:"registered_by" bson:"registered_by"`
+	CreatedAt     time.Time          `json:"created_at" bson:"created_at"`
+	UpdatedAt     time.Time          `json:"updated_at" bson:"updated_at"`
+	DeletedAt     time.Time          `json:"deleted_at" bson:"deleted_at"`
+}
