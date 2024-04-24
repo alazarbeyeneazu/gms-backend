@@ -15,6 +15,10 @@ type User interface {
 	GetUsers(ctx context.Context, filter bson.M) ([]dto.User, error)
 }
 type Customer interface {
+	SaveCustomer(ctx context.Context, customer dto.RegisterCustomer) error
+	GetCustomer(ctx context.Context, filter bson.M) ([]dto.RegisterCustomer, error)
+	UpdateCustomer(ctx context.Context, filter bson.M, update dto.RegisterCustomer) error
+	DeleteCustomer(ctx context.Context, customerID primitive.ObjectID) error
 }
 type PaymentRule interface {
 	SavepaymentRule(ctx context.Context, paymentRule dto.PaymentRule) error
