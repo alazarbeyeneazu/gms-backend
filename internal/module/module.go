@@ -19,3 +19,9 @@ type PaymentRule interface {
 	GetPaymentRule(ctx context.Context, filter bson.M) ([]dto.PaymentRule, error)
 	DeletepaymentRule(ctx context.Context, paymentRule dto.PaymentRule) (dto.PaymentRule, error)
 }
+type Customer interface {
+	RegisterUser(ctx context.Context, customer dto.RegisterCustomer) (dto.RegisterCustomer, error)
+	GetCustomers(ctx context.Context, filter bson.M) ([]dto.RegisterCustomer, error)
+	UpdateCustomer(ctx context.Context, customerRequest dto.RegisterCustomer) (dto.RegisterCustomer, error)
+	DeleteCustomer(ctx context.Context, customerRequest dto.RegisterCustomer) error
+}
