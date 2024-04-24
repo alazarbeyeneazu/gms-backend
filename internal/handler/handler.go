@@ -14,3 +14,9 @@ type PaymentRule interface {
 	GetPaymentRule(c *gin.Context)
 	DeletepaymentRule(c *gin.Context)
 }
+type Customer interface {
+	RegisterCustomer(c *gin.Context)
+	GetCustomer(c *gin.Context)
+	UpdateCustomer(c *gin.Context)
+	DeleteCustomer(c *gin.Context)
+}
