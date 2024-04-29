@@ -6,6 +6,7 @@ import (
 	"github.com/alazarbeyeneazu/gms-backend/internal/module/customer"
 	"github.com/alazarbeyeneazu/gms-backend/internal/module/paymentrule"
 	"github.com/alazarbeyeneazu/gms-backend/internal/module/users"
+	"github.com/spf13/viper"
 	"go.uber.org/zap"
 )
 
@@ -21,6 +22,6 @@ func InitModule(log *zap.Logger, persistenceDb Persistence) Module {
 		User:        users.Init(persistenceDb.user, log),
 		PaymentRule: paymentrule.Init(persistenceDb.paymentRule, log),
 		customer:    customer.Init(persistenceDb.customer, persistenceDb.paymentRule, persistenceDb.user, log),
-		auth:        auth.Init(persistenceDb.user, persistenceDb.auth, log),
+		auth:        auth.Init(persistenceDb.user, persistenceDb.auth, viper.GetString("jwt_key"), log),
 	}
 }

@@ -3,6 +3,7 @@ package dto
 import (
 	"time"
 
+	"github.com/golang-jwt/jwt/v4"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -44,4 +45,12 @@ type UserAuth struct {
 	ID       primitive.ObjectID `json:"id" bson:"_id"`
 	UserID   primitive.ObjectID `json:"user_id" bson:"user_id" validate:"required"`
 	Password string             `json:"password" bson:"password" validate:"required"`
+}
+type Claim struct {
+	UserID primitive.ObjectID `json:"user_id"`
+	jwt.RegisteredClaims
+}
+type LoginRequest struct {
+	Phone    string `json:"phone" validate:"required"`
+	Password string `json:"password" validate:"required"`
 }

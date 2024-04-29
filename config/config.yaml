@@ -5,3 +5,4 @@ app:
   port: 8000
 debug: true
 db_name: deafric
+jwt_key: deafricjwttokenauthkey

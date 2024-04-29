@@ -27,4 +27,5 @@ type Customer interface {
 }
 type Auth interface {
 	RegisterUserAuth(ctx context.Context, userAuth dto.UserAuth) error
+	Login(ctx context.Context, loginRequst dto.LoginRequest) (string, error)
 }
