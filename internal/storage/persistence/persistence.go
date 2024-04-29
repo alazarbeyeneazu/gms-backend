@@ -26,3 +26,6 @@ type PaymentRule interface {
 	GetPaymentRule(ctx context.Context, filter bson.M) ([]dto.PaymentRule, error)
 	DeletepaymentRule(ctx context.Context, paymentID primitive.ObjectID) error
 }
+type Auth interface {
+	SaveUserAuth(ctx context.Context, userAuth dto.UserAuth) error
+}
