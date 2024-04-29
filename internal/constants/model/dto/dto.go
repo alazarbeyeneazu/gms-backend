@@ -40,3 +40,8 @@ type RegisterCustomer struct {
 	UpdatedAt     time.Time          `json:"updated_at" bson:"updated_at"`
 	DeletedAt     time.Time          `json:"deleted_at" bson:"deleted_at"`
 }
+type UserAuth struct {
+	ID       primitive.ObjectID `json:"id" bson:"_id"`
+	UserID   primitive.ObjectID `json:"user_id" bson:"user_id" validate:"required"`
+	Password string             `json:"password" bson:"password" validate:"required"`
+}

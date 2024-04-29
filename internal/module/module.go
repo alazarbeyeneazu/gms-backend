@@ -25,3 +25,6 @@ type Customer interface {
 	UpdateCustomer(ctx context.Context, customerRequest dto.RegisterCustomer) (dto.RegisterCustomer, error)
 	DeleteCustomer(ctx context.Context, customerRequest dto.RegisterCustomer) error
 }
+type Auth interface {
+	RegisterUserAuth(ctx context.Context, userAuth dto.UserAuth) error
+}

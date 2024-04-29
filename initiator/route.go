@@ -3,6 +3,7 @@ package initiator
 import (
 	"github.com/gin-gonic/gin"
 
+	"github.com/alazarbeyeneazu/gms-backend/internal/glue/auth"
 	"github.com/alazarbeyeneazu/gms-backend/internal/glue/customer"
 	"github.com/alazarbeyeneazu/gms-backend/internal/glue/paymentrule"
 	"github.com/alazarbeyeneazu/gms-backend/internal/glue/users"
@@ -17,5 +18,6 @@ func InitRouting(
 	users.Init(grp, log, handler.User)
 	paymentrule.Init(grp, log, handler.PaymentRule)
 	customer.Init(grp, log, handler.customer)
+	auth.Init(grp, log, handler.auth)
 
 }

@@ -20,3 +20,7 @@ type Customer interface {
 	UpdateCustomer(c *gin.Context)
 	DeleteCustomer(c *gin.Context)
 }
+
+type Auth interface {
+	RegisterUserAuth(c *gin.Context)
+}
