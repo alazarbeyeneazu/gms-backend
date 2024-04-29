@@ -2,6 +2,7 @@ package initiator
 
 import (
 	"github.com/alazarbeyeneazu/gms-backend/internal/handler"
+	"github.com/alazarbeyeneazu/gms-backend/internal/handler/auth"
 	"github.com/alazarbeyeneazu/gms-backend/internal/handler/customer"
 	"github.com/alazarbeyeneazu/gms-backend/internal/handler/paymentrule"
 	"github.com/alazarbeyeneazu/gms-backend/internal/handler/users"
@@ -12,6 +13,7 @@ type Handler struct {
 	User        handler.User
 	PaymentRule handler.PaymentRule
 	customer    handler.Customer
+	auth        handler.Auth
 }
 
 func InitHandler(module Module, log zap.Logger) Handler {
@@ -19,5 +21,6 @@ func InitHandler(module Module, log zap.Logger) Handler {
 		User:        users.Init(module.User, log),
 		PaymentRule: paymentrule.Init(module.PaymentRule, log),
 		customer:    customer.Init(module.customer, log),
+		auth:        auth.Init(module.auth, log),
 	}
 }
