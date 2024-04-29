@@ -23,4 +23,5 @@ type Customer interface {
 
 type Auth interface {
 	RegisterUserAuth(c *gin.Context)
+	Login(c *gin.Context)
 }

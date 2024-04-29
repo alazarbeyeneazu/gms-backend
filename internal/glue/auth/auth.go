@@ -23,6 +23,12 @@ func Init(
 			Handler:    user.RegisterUserAuth,
 			Middleware: []gin.HandlerFunc{},
 			Domains:    []string{"v1"},
+		}, {
+			Method:     http.MethodPost,
+			Path:       "/user/login",
+			Handler:    user.Login,
+			Middleware: []gin.HandlerFunc{},
+			Domains:    []string{"v1"},
 		},
 	}
 	routing.RegisterRoute(grp, userRoute, log)
