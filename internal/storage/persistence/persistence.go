@@ -28,4 +28,5 @@ type PaymentRule interface {
 }
 type Auth interface {
 	SaveUserAuth(ctx context.Context, userAuth dto.UserAuth) error
+	GetAuth(ctx context.Context, filter bson.M) (dto.UserAuth, error)
 }
