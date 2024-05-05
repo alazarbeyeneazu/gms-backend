@@ -20,7 +20,7 @@ func ErrorHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Next()
 		if len(c.Errors) > 0 {
-			e := c.Errors[0] // FIXME: how to handle multiple errors?
+			e := c.Errors[0]
 			err := e.Unwrap()
 
 			response := CastErrorResponse(err)
