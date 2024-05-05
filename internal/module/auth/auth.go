@@ -73,6 +73,8 @@ func (u *userAuth) Login(ctx context.Context, loginRequst dto.LoginRequest) (str
 	}
 	user, err := u.userDB.GetUsers(ctx, bson.M{"phone": loginRequst.Phone})
 	if err != nil {
+		u.log.Error("incorrect username or password", zap.Error(err))
+		err = errors.ErrInvalidUserInput.Wrap(err, "(የተሳሳተ ስልክ ወይም የይለፍ ቃል) incorrect username or password")
 		return "", err
 	}
 	password, err := u.authPersistence.GetAuth(ctx, bson.M{"user_id": user[0].ID})
@@ -80,6 +82,8 @@ func (u *userAuth) Login(ctx context.Context, loginRequst dto.LoginRequest) (str
 		return "", err
 	}
 	if err := utils.ComparePasswords(password.Password, loginRequst.Password); err != nil {
+		u.log.Error("(የተሳሳተ ስልክ ወይም የይለፍ ቃል) incorrect phone or password ", zap.Error(err))
+		err = errors.ErrInvalidUserInput.Wrap(err, "(የተሳሳተ ስልክ ወይም የይለፍ ቃል) incorrect username or password")
 		return "", err
 	}
 	expirationTime := time.Now().Add(time.Hour * 16)

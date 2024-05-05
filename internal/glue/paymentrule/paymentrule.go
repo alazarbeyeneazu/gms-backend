@@ -5,6 +5,7 @@ import (
 
 	"github.com/alazarbeyeneazu/gms-backend/internal/glue/routing"
 	"github.com/alazarbeyeneazu/gms-backend/internal/handler"
+	"github.com/alazarbeyeneazu/gms-backend/internal/handler/middleware"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -30,11 +31,13 @@ func Init(
 			Middleware: []gin.HandlerFunc{},
 			Domains:    []string{"v1"},
 		}, {
-			Method:     http.MethodGet,
-			Path:       "/payment/rule",
-			Handler:    user.GetPaymentRule,
-			Middleware: []gin.HandlerFunc{},
-			Domains:    []string{"v1"},
+			Method:  http.MethodGet,
+			Path:    "/payment/rule",
+			Handler: user.GetPaymentRule,
+			Middleware: []gin.HandlerFunc{
+				middleware.Auth(),
+			},
+			Domains: []string{"v1"},
 		}, {
 			Method:     http.MethodDelete,
 			Path:       "/payment/rule",

@@ -48,6 +48,7 @@ func Initiate() {
 
 	logger.Info("initializing server ")
 	server := gin.New()
+	server.Use(middleware.CORS())
 	server.Use(middleware.GinLogger(*logger))
 	server.Use(middleware.ErrorHandler())
 	grp := server.Group("/api")
